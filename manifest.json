@@ -1,0 +1,20 @@
+{
+  "name": "ThrottleScope — Polo GT TSI",
+  "short_name": "ThrottleScope",
+  "description": "Content creation toolkit for the 2018 VW Polo GT TSI Carbon Black",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "orientation": "portrait-primary",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "categories": ["utilities", "lifestyle"],
+  "shortcuts": [
+    { "name": "Reel Hooks", "url": "/?tab=hooks", "description": "Generate reel hooks" },
+    { "name": "Caption Kit", "url": "/?tab=captions", "description": "Generate captions" },
+    { "name": "Reel Script", "url": "/?tab=script", "description": "Build reel scripts" }
+  ]
+}

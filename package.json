@@ -1,0 +1,17 @@
+{
+  "name": "polo-kit",
+  "version": "1.0.0",
+  "description": "Content creation CLI for the 2018 VW Polo GT TSI Carbon Black — by @throttlescope",
+  "main": "cli/polo-kit.js",
+  "bin": {
+    "polo-kit": "cli/polo-kit.js"
+  },
+  "scripts": {
+    "start": "npx serve . -p 3000",
+    "cli": "node cli/polo-kit.js"
+  },
+  "keywords": ["volkswagen", "polo", "gt-tsi", "carbon-black", "car-content", "throttlescope"],
+  "author": "@throttlescope",
+  "license": "MIT",
+  "engines": { "node": ">=14" }
+}

@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="description" content="Content creation toolkit for the 2018 VW Polo GT TSI Carbon Black — by @throttlescope">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ThrottleScope">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>ThrottleScope — Polo GT TSI Carbon Black</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #0a0a0a;
+  --deep: #111111;
+  --surface: #1a1a1a;
+  --raised: #222222;
+  --border: #2a2a2a;
+  --accent: #c0392b;
+  --accent-dim: #8b1a13;
+  --gold: #d4a017;
+  --white: #f0ece4;
+  --muted: #666;
+  --text: #e8e4dc;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--black);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* NAV */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--black);
+  border-bottom: 1px solid var(--border);
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: 0.05em;
+  color: var(--white);
+}
+.nav-logo span { color: var(--accent); }
+.nav-tabs {
+  display: flex;
+  gap: 2px;
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 3px;
+}
+.nav-tab {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s;
+  letter-spacing: 0.02em;
+}
+.nav-tab.active {
+  background: var(--raised);
+  color: var(--white);
+}
+.nav-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+.nav-tag span { color: var(--accent); }
+
+/* PAGES */
+.page { display: none; padding: 2rem 1.5rem; max-width: 900px; margin: 0 auto; }
+.page.active { display: block; }
+
+/* HERO CARD */
+.hero-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+.hero-top {
+  background: var(--deep);
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.hero-top::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--accent);
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: 48px;
+  line-height: 0.95;
+  letter-spacing: 0.03em;
+  color: var(--white);
+}
+.hero-title small {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.hero-badge {
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  letter-spacing: 0.08em;
+  align-self: flex-start;
+}
+.stats-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.stat-box {
+  padding: 1.25rem;
+  border-right: 1px solid var(--border);
+  text-align: center;
+}
+.stat-box:last-child { border-right: none; }
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 32px;
+  color: var(--white);
+  line-height: 1;
+}
+.stat-unit { font-size: 11px; color: var(--accent); font-family: var(--font-mono); }
+.stat-lbl { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+/* SECTION HEADERS */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* TOOL CARDS */
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 1.5rem;
+}
+.tool-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.tool-card:hover { border-color: var(--accent); background: var(--raised); }
+.tool-icon {
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: var(--accent);
+}
+.tool-name {
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+.tool-desc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* SPEC TABLE */
+.spec-table {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+.spec-row {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+}
+.spec-row:last-child { border-bottom: none; }
+.spec-key {
+  padding: 10px 1.25rem;
+  font-size: 12px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  border-right: 1px solid var(--border);
+  background: var(--deep);
+}
+.spec-val {
+  padding: 10px 1.25rem;
+  font-size: 13px;
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* GENERATOR PANEL */
+.gen-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+.gen-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.gen-title {
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--white);
+}
+.gen-body { padding: 1.25rem; }
+
+/* INPUTS */
+select, textarea, input[type="text"] {
+  width: 100%;
+  background: var(--raised);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 13px;
+  padding: 10px 14px;
+  outline: none;
+  transition: border-color 0.15s;
+  margin-bottom: 10px;
+  -webkit-appearance: none;
+}
+select:focus, textarea:focus, input[type="text"]:focus {
+  border-color: var(--accent);
+}
+select option { background: var(--raised); }
+
+/* BUTTONS */
+.btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn:hover { background: #a93226; }
+.btn:active { transform: scale(0.98); }
+.btn-ghost {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+.btn-ghost:hover { background: var(--raised); color: var(--text); }
+.btn-row { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* OUTPUT AREA */
+.output-area {
+  background: var(--deep);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  font-size: 13px;
+  color: var(--text);
+  min-height: 80px;
+  margin-top: 10px;
+  white-space: pre-wrap;
+  line-height: 1.7;
+  position: relative;
+}
+.output-empty { color: var(--muted); font-style: italic; }
+.copy-btn {
+  position: absolute;
+  top: 8px; right: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--muted);
+  font-size: 11px;
+  padding: 3px 8px;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  transition: all 0.15s;
+}
+.copy-btn:hover { color: var(--white); border-color: var(--accent); }
+
+/* HOOKS GRID */
+.hooks-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+.hook-item {
+  background: var(--deep);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 1rem;
+  font-size: 13px;
+  line-height: 1.6;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: fadeUp 0.3s forwards;
+}
+.hook-item:nth-child(1) { animation-delay: 0.05s; }
+.hook-item:nth-child(2) { animation-delay: 0.1s; }
+.hook-item:nth-child(3) { animation-delay: 0.15s; }
+.hook-item:nth-child(4) { animation-delay: 0.2s; }
+.hook-item:nth-child(5) { animation-delay: 0.25s; }
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+.hook-num {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--accent);
+  min-width: 20px;
+  padding-top: 2px;
+}
+
+/* HASHTAG CLOUD */
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+.htag {
+  background: var(--raised);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font-size: 12px;
+  padding: 4px 12px;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: var(--font-mono);
+}
+.htag:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+.htag.selected { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+/* CAPTION CARD */
+.caption-card {
+  background: var(--deep);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-top: 10px;
+  position: relative;
+}
+.caption-text {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.caption-tags {
+  font-size: 12px;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  line-height: 1.8;
+}
+
+/* SCRIPT OUTPUT */
+.script-block {
+  background: var(--deep);
+  border-left: 3px solid var(--accent);
+  padding: 12px 1rem;
+  margin: 8px 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.script-block .cue {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  margin-bottom: 4px;
+}
+
+/* CLI PAGE */
+.cli-terminal {
+  background: #0d0d0d;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+.cli-bar {
+  background: var(--surface);
+  padding: 10px 1rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-bottom: 1px solid var(--border);
+}
+.cli-dot { width: 10px; height: 10px; border-radius: 50%; }
+.cli-body {
+  padding: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 2;
+}
+.cli-line { color: #666; }
+.cli-line .prompt { color: var(--accent); }
+.cli-line .cmd { color: var(--white); }
+.cli-line .arg { color: var(--gold); }
+.cli-line .out { color: #4ec9b0; }
+.cli-line .comment { color: #444; }
+
+/* TOAST */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: var(--raised);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 13px;
+  color: var(--white);
+  z-index: 999;
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  pointer-events: none;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+/* PWA INSTALL BANNER */
+.install-banner {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  gap: 12px;
+}
+.install-banner p { font-size: 13px; color: var(--muted); }
+.install-banner strong { color: var(--text); }
+
+/* MOBILE */
+@media (max-width: 600px) {
+  nav { padding: 0 1rem; }
+  .nav-tag { display: none; }
+  .hero-title { font-size: 36px; }
+  .stats-strip { grid-template-columns: repeat(2, 1fr); }
+  .stat-box:nth-child(2) { border-right: none; }
+  .stat-box:nth-child(1), .stat-box:nth-child(2) { border-bottom: 1px solid var(--border); }
+  .page { padding: 1.25rem 1rem; }
+}
+
+/* LOADING */
+.loading {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+  color: var(--muted);
+  font-size: 12px;
+}
+.dot-spin {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 1s infinite;
+}
+.dot-spin:nth-child(2) { animation-delay: 0.2s; }
+.dot-spin:nth-child(3) { animation-delay: 0.4s; }
+@keyframes pulse {
+  0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
+  40% { opacity: 1; transform: scale(1); }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">THROTTLE<span>SCOPE</span></div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showPage('home')">Home</button>
+    <button class="nav-tab" onclick="showPage('hooks')">Hooks</button>
+    <button class="nav-tab" onclick="showPage('captions')">Captions</button>
+    <button class="nav-tab" onclick="showPage('script')">Script</button>
+    <button class="nav-tab" onclick="showPage('cli')">CLI</button>
+  </div>
+  <div class="nav-tag">@<span>throttlescope</span></div>
+</nav>
+
+<!-- HOME PAGE -->
+<div class="page active" id="page-home">
+  <div id="install-banner" class="install-banner" style="display:none;">
+    <p><strong>Install ThrottleScope</strong> as an app for quick access on your phone</p>
+    <button class="btn" id="install-btn" style="white-space:nowrap; font-size:12px; padding:8px 14px;">Install App</button>
+  </div>
+
+  <div class="hero-card">
+    <div class="hero-top">
+      <div>
+        <div class="hero-title">
+          <small>2018 · Volkswagen</small>
+          Polo GT TSI<br>Carbon Black
+        </div>
+      </div>
+      <span class="hero-badge">CARBON BLACK ED.</span>
+    </div>
+    <div class="stats-strip">
+      <div class="stat-box">
+        <div class="stat-num">103</div>
+        <div class="stat-unit">bhp</div>
+        <div class="stat-lbl">Power</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">175</div>
+        <div class="stat-unit">Nm</div>
+        <div class="stat-lbl">Torque</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">9.7</div>
+        <div class="stat-unit">sec</div>
+        <div class="stat-lbl">0–100</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">17.2</div>
+        <div class="stat-unit">kmpl</div>
+        <div class="stat-lbl">Mileage</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Content tools</div>
+  <div class="tool-grid">
+    <div class="tool-card" onclick="showPage('hooks')">
+      <div class="tool-icon">&#9889;</div>
+      <div class="tool-name">Reel hook generator</div>
+      <div class="tool-desc">AI-crafted opening lines that stop the scroll for your Polo reels.</div>
+    </div>
+    <div class="tool-card" onclick="showPage('captions')">
+      <div class="tool-icon">&#9997;</div>
+      <div class="tool-name">Caption + hashtag kit</div>
+      <div class="tool-desc">Ready-to-post captions with optimised hashtag sets for car content.</div>
+    </div>
+    <div class="tool-card" onclick="showPage('script')">
+      <div class="tool-icon">&#127916;</div>
+      <div class="tool-name">Reel script builder</div>
+      <div class="tool-desc">Turn specs into a punchy 30–60 sec spoken reel script with cues.</div>
+    </div>
+    <div class="tool-card" onclick="showPage('cli')">
+      <div class="tool-icon">&#62;</div>
+      <div class="tool-name">CLI tool</div>
+      <div class="tool-desc">Run any generator from your terminal with <code style="font-family:var(--font-mono);font-size:11px;color:var(--accent)">polo-kit</code>.</div>
+    </div>
+  </div>
+
+  <div class="section-label">Full specs</div>
+  <div class="spec-table">
+    <div class="spec-row"><div class="spec-key">engine</div><div class="spec-val">1.2L TSI 4-cylinder turbocharged</div></div>
+    <div class="spec-row"><div class="spec-key">power</div><div class="spec-val">103 bhp @ 5000 rpm</div></div>
+    <div class="spec-row"><div class="spec-key">torque</div><div class="spec-val">175 Nm @ 1500 rpm</div></div>
+    <div class="spec-row"><div class="spec-key">gearbox</div><div class="spec-val">7-speed DSG (dual-clutch)</div></div>
+    <div class="spec-row"><div class="spec-key">drivetrain</div><div class="spec-val">Front-wheel drive</div></div>
+    <div class="spec-row"><div class="spec-key">0–100 km/h</div><div class="spec-val">~9.7 seconds</div></div>
+    <div class="spec-row"><div class="spec-key">top speed</div><div class="spec-val">~180 km/h</div></div>
+    <div class="spec-row"><div class="spec-key">mileage</div><div class="spec-val">17.21 kmpl (ARAI)</div></div>
+    <div class="spec-row"><div class="spec-key">fuel tank</div><div class="spec-val">45 litres (~774 km range)</div></div>
+    <div class="spec-row"><div class="spec-key">suspension (F)</div><div class="spec-val">McPherson strut with stabiliser bar</div></div>
+    <div class="spec-row"><div class="spec-key">suspension (R)</div><div class="spec-val">Semi-independent trailing arm</div></div>
+    <div class="spec-row"><div class="spec-key">special edition</div><div class="spec-val">Piano black trim · carbon black exterior accents</div></div>
+    <div class="spec-row"><div class="spec-key">interior</div><div class="spec-val">GT sport seats · leather multifunction steering wheel</div></div>
+  </div>
+</div>
+
+<!-- HOOKS PAGE -->
+<div class="page" id="page-hooks">
+  <div class="section-label">Reel hook generator</div>
+  <div class="gen-panel">
+    <div class="gen-header">
+      <span class="gen-title">Pick a vibe, get 5 opening hooks</span>
+    </div>
+    <div class="gen-body">
+      <select id="hook-vibe">
+        <option value="aggressive">Aggressive / hype</option>
+        <option value="poetic">Poetic / cinematic</option>
+        <option value="technical">Technical / spec-focused</option>
+        <option value="story">Storytelling / personal</option>
+        <option value="challenge">Challenge / question</option>
+        <option value="nostalgia">Nostalgia / OG car culture</option>
+      </select>
+      <div class="btn-row">
+        <button class="btn" onclick="generateHooks()">&#9889; Generate hooks</button>
+        <button class="btn btn-ghost" onclick="copyHooks()">Copy all</button>
+      </div>
+      <div id="hooks-output" class="hooks-grid" style="margin-top:16px;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- CAPTIONS PAGE -->
+<div class="page" id="page-captions">
+  <div class="section-label">Caption + hashtag kit</div>
+  <div class="gen-panel">
+    <div class="gen-header">
+      <span class="gen-title">Caption generator</span>
+    </div>
+    <div class="gen-body">
+      <select id="caption-mood">
+        <option value="hype">Hype drop</option>
+        <option value="chill">Chill Sunday drive</option>
+        <option value="specs">Spec flex</option>
+        <option value="mod">Mod reveal</option>
+        <option value="rant">Car enthusiast rant</option>
+        <option value="collab">Brand collab ready</option>
+      </select>
+      <button class="btn" onclick="generateCaption()">&#9997; Generate caption</button>
+      <div id="caption-output"></div>
+    </div>
+  </div>
+
+  <div class="section-label">Hashtag sets</div>
+  <div class="gen-panel">
+    <div class="gen-header">
+      <span class="gen-title">Select a set — tap to toggle</span>
+      <button class="btn btn-ghost" style="font-size:11px;padding:5px 10px;" onclick="copySelectedTags()">Copy selected</button>
+    </div>
+    <div class="gen-body">
+      <div class="tag-cloud" id="tag-cloud"></div>
+      <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;">
+        <button class="btn btn-ghost" style="font-size:11px;" onclick="selectTagSet('core')">Core Polo</button>
+        <button class="btn btn-ghost" style="font-size:11px;" onclick="selectTagSet('vw')">VW India</button>
+        <button class="btn btn-ghost" style="font-size:11px;" onclick="selectTagSet('reach')">Max reach</button>
+        <button class="btn btn-ghost" style="font-size:11px;" onclick="clearTags()">Clear</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SCRIPT PAGE -->
+<div class="page" id="page-script">
+  <div class="section-label">Reel script builder</div>
+  <div class="gen-panel">
+    <div class="gen-header">
+      <span class="gen-title">Build a spoken reel script</span>
+    </div>
+    <div class="gen-body">
+      <select id="script-length">
+        <option value="15">15 seconds — quick hook</option>
+        <option value="30" selected>30 seconds — standard reel</option>
+        <option value="60">60 seconds — deep dive</option>
+      </select>
+      <select id="script-focus">
+        <option value="overview">Full overview</option>
+        <option value="engine">Engine & performance</option>
+        <option value="design">Carbon Black design</option>
+        <option value="dsg">DSG gearbox experience</option>
+        <option value="daily">Daily driver life</option>
+        <option value="mods">Mod potential</option>
+      </select>
+      <button class="btn" onclick="generateScript()">&#127916; Build script</button>
+      <div id="script-output" style="margin-top:12px;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- CLI PAGE -->
+<div class="page" id="page-cli">
+  <div class="section-label">CLI tool — polo-kit</div>
+
+  <div class="cli-terminal">
+    <div class="cli-bar">
+      <div class="cli-dot" style="background:#ff5f57;"></div>
+      <div class="cli-dot" style="background:#febc2e;"></div>
+      <div class="cli-dot" style="background:#28c840;"></div>
+      <span style="font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-left:8px;">polo-kit — terminal</span>
+    </div>
+    <div class="cli-body">
+      <div class="cli-line"><span class="comment"># Install globally via npm</span></div>
+      <div class="cli-line"><span class="prompt">$ </span><span class="cmd">npm install -g polo-kit</span></div>
+      <div class="cli-line">&nbsp;</div>
+      <div class="cli-line"><span class="comment"># Generate 5 reel hooks</span></div>
+      <div class="cli-line"><span class="prompt">$ </span><span class="cmd">polo-kit hooks</span> <span class="arg">--vibe aggressive</span></div>
+      <div class="cli-line"><span class="out">  [1] Low stance, dark trim, full send. The Carbon Black doesn't arrive — it takes over.</span></div>
+      <div class="cli-line"><span class="out">  [2] 103 horses, 7-speed DSG. Small hatch. Big character.</span></div>
+      <div class="cli-line">&nbsp;</div>
+      <div class="cli-line"><span class="comment"># Generate a caption</span></div>
+      <div class="cli-line"><span class="prompt">$ </span><span class="cmd">polo-kit caption</span> <span class="arg">--mood hype</span></div>
+      <div class="cli-line">&nbsp;</div>
+      <div class="cli-line"><span class="comment"># Build a 30s reel script</span></div>
+      <div class="cli-line"><span class="prompt">$ </span><span class="cmd">polo-kit script</span> <span class="arg">--length 30 --focus engine</span></div>
+      <div class="cli-line">&nbsp;</div>
+      <div class="cli-line"><span class="comment"># Print all specs</span></div>
+      <div class="cli-line"><span class="prompt">$ </span><span class="cmd">polo-kit specs</span></div>
+      <div class="cli-line"><span class="out">  Engine    : 1.2L TSI 4-cyl turbocharged</span></div>
+      <div class="cli-line"><span class="out">  Power     : 103 bhp @ 5000 rpm</span></div>
+      <div class="cli-line"><span class="out">  Torque    : 175 Nm @ 1500 rpm</span></div>
+      <div class="cli-line"><span class="out">  Gearbox   : 7-speed DSG</span></div>
+      <div class="cli-line"><span class="out">  0-100     : ~9.7s</span></div>
+      <div class="cli-line"><span class="out">  Edition   : Carbon Black</span></div>
+      <div class="cli-line">&nbsp;</div>
+      <div class="cli-line"><span class="comment"># Export spec card as JSON</span></div>
+      <div class="cli-line"><span class="prompt">$ </span><span class="cmd">polo-kit specs</span> <span class="arg">--json > polo-specs.json</span></div>
+    </div>
+  </div>
+
+  <div class="section-label">CLI source — cli/polo-kit.js</div>
+  <div class="cli-terminal">
+    <div class="cli-bar">
+      <div class="cli-dot" style="background:#ff5f57;"></div>
+      <div class="cli-dot" style="background:#febc2e;"></div>
+      <div class="cli-dot" style="background:#28c840;"></div>
+      <span style="font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-left:8px;">cli/polo-kit.js</span>
+    </div>
+    <div class="cli-body" style="font-size:12px; line-height:1.7; color:#888; max-height:320px; overflow-y:auto;">
+<pre style="color:#888; font-family:var(--font-mono); font-size:12px; white-space:pre-wrap;"><span style="color:#c678dd;">#!/usr/bin/env node</span>
+<span style="color:#5c6370;">// polo-kit CLI — ThrottleScope content tool</span>
+<span style="color:#5c6370;">// Usage: polo-kit &lt;command&gt; [options]</span>
+
+<span style="color:#c678dd;">const</span> <span style="color:#e5c07b;">args</span> = process.argv.slice(2);
+<span style="color:#c678dd;">const</span> <span style="color:#e5c07b;">cmd</span> = args[0];
+<span style="color:#c678dd;">const</span> <span style="color:#e5c07b;">flags</span> = parseFlags(args.slice(1));
+
+<span style="color:#c678dd;">const</span> <span style="color:#e5c07b;">SPECS</span> = {
+  engine: <span style="color:#98c379;">"1.2L TSI 4-cylinder turbocharged"</span>,
+  power:  <span style="color:#98c379;">"103 bhp @ 5000 rpm"</span>,
+  torque: <span style="color:#98c379;">"175 Nm @ 1500 rpm"</span>,
+  gearbox:<span style="color:#98c379;">"7-speed DSG"</span>,
+  sprint: <span style="color:#98c379;">"~9.7 seconds (0-100)"</span>,
+  edition:<span style="color:#98c379;">"Carbon Black"</span>,
+  year:   <span style="color:#98c379;">"2018"</span>
+};
+
+<span style="color:#c678dd;">switch</span> (cmd) {
+  <span style="color:#c678dd;">case</span> <span style="color:#98c379;">"hooks"</span>:   generateHooks(flags.vibe); <span style="color:#c678dd;">break</span>;
+  <span style="color:#c678dd;">case</span> <span style="color:#98c379;">"caption"</span>: generateCaption(flags.mood); <span style="color:#c678dd;">break</span>;
+  <span style="color:#c678dd;">case</span> <span style="color:#98c379;">"script"</span>:  generateScript(flags); <span style="color:#c678dd;">break</span>;
+  <span style="color:#c678dd;">case</span> <span style="color:#98c379;">"specs"</span>:   printSpecs(flags.json); <span style="color:#c678dd;">break</span>;
+  <span style="color:#c678dd;">default</span>:     printHelp();
+}</pre>
+    </div>
+  </div>
+
+  <div class="section-label">Try it live</div>
+  <div class="gen-panel">
+    <div class="gen-header"><span class="gen-title">Simulate CLI command in browser</span></div>
+    <div class="gen-body">
+      <select id="cli-cmd">
+        <option value="hooks --vibe aggressive">polo-kit hooks --vibe aggressive</option>
+        <option value="hooks --vibe poetic">polo-kit hooks --vibe poetic</option>
+        <option value="caption --mood hype">polo-kit caption --mood hype</option>
+        <option value="specs">polo-kit specs</option>
+        <option value="script --length 30 --focus engine">polo-kit script --length 30 --focus engine</option>
+      </select>
+      <button class="btn" onclick="runCLI()">&#62;_ Run command</button>
+      <div id="cli-output" class="output-area" style="margin-top:10px; font-family:var(--font-mono); font-size:12px;">
+        <span class="output-empty">Output will appear here...</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">Copied!</div>
+
+<script>
+const HOOKS = {
+  aggressive: [
+    "Low stance. Dark trim. Zero apologies. The Carbon Black is here.",
+    "103 horses. 7-speed DSG. Small hatch. Massive character.",
+    "You don't drive the Polo GT. You let it drive you.",
+    "Carbon Black edition — because grey is for people who don't care.",
+    "It's not the biggest car in the room. It's the most dangerous."
+  ],
+  poetic: [
+    "Some cars are transportation. This one is a conversation.",
+    "Black isn't just a colour here. It's a philosophy.",
+    "175 Nm from 1500 rpm — torque that arrives before you ask.",
+    "A German engineer sat down and said: make it perfect. They did.",
+    "The roads didn't change. You just started seeing them differently."
+  ],
+  technical: [
+    "1.2L TSI. 103 bhp. 175 Nm. 7-speed DSG. On paper it's fast. In person it's alive.",
+    "Dual-clutch gearbox, McPherson struts, turbocharged from idle — this is what GT means.",
+    "0 to 100 in 9.7 seconds. DSG launch control engaged. Let's talk.",
+    "The EA111 1.2 TSI — overbuilt for a hatchback. That's the point.",
+    "Variable geometry turbo + DSG paddle shifts = 200ms gear changes. Every. Single. Time."
+  ],
+  story: [
+    "I bought it because of the spec sheet. I kept it because of the feeling.",
+    "First time I floored it in Sport mode, I immediately knew I was in trouble.",
+    "People see a hatchback. People who know, see the GT badge and step back.",
+    "Three years, 40,000 km, zero regrets. This is the Polo GT story.",
+    "My dad asked why I didn't get a sedan. I showed him the DSG. He understood."
+  ],
+  challenge: [
+    "Name a better hot hatch under 10 lakh in India. I'll wait.",
+    "You think this is just a Polo? Floor it once and come back to me.",
+    "DSG or manual? Wrong question. The question is: how fast do you want it?",
+    "Can your car do 0-100 in under 10 seconds? The Carbon Black can. Casually.",
+    "Tell me you're a car person without telling me — I'll start: Carbon Black GT TSI."
+  ],
+  nostalgia: [
+    "2018. The last era before every hatch went electric. Savour it.",
+    "The Polo GT TSI is the reason a generation of Indians fell in love with turbos.",
+    "Before the SUV takeover — there was this. Clean, fast, and brutally honest.",
+    "Some people have posters on their wall. I have a Carbon Black in my garage.",
+    "The car that taught Indian roads what a dual-clutch gearbox feels like."
+  ]
+};
+
+const CAPTIONS = {
+  hype: {
+    text: "Carbon Black. 7-speed DSG. 175 Nm from idle.\nSome cars ask for attention — this one just earns it.\n\nNo filter needed when the trim does the talking. 🖤",
+    tags: "#PoloGTTSI #CarbonBlack #VWIndia #HotHatch #DSG #CarReels #ThrottleScope #PoloGT #CarEnthusiast #Turbocharged"
+  },
+  chill: {
+    text: "Sunday morning. Empty roads. The GT in Sport mode.\nThis is what 17 kmpl of soul feels like.\n\nSome drives just fix things.",
+    tags: "#SundayDrive #PoloGT #VWLife #CarbonBlack #WeekendVibes #CarCulture #ThrottleScope #SlowDown"
+  },
+  specs: {
+    text: "Specs don't lie:\n1.2L TSI · 103 bhp · 175 Nm · 7-speed DSG · 0-100 in 9.7s\n\nAll of that in a car smaller than your ego.\nCarbon Black Edition. 2018. Still relevant.",
+    tags: "#PoloGTTSI #Specs #CarNerd #DSGLife #TurboHatch #VWIndia #CarbonBlack #ThrottleScope #CarFacts"
+  },
+  mod: {
+    text: "Stock Carbon Black hitting different with the new [mod] on.\nThe base was already strong — this just made it dangerous.\n\nDetails in the comments 👇",
+    tags: "#PoloGTMods #CarbonBlack #VWMods #CarMods #PoloGT #ModifiedCars #ThrottleScope #VWCommunity"
+  },
+  rant: {
+    text: "Hot take: The 2018 Polo GT TSI Carbon Black is still the best driver's car under ₹12 lakh in India.\n\nDSG. Turbo. German build. Carbon trim.\nEveryone moved to SUVs and left this gem behind.",
+    tags: "#HotTake #PoloGT #CarOpinion #DSG #VWIndia #ThrottleScope #CarbonBlack #UnderratedCars"
+  },
+  collab: {
+    text: "Partnered with [Brand] to bring you this — and there's no better backdrop than the Carbon Black.\n\nDark exterior. Sharp angles. Timeless.\n\nLink in bio for more. 🖤",
+    tags: "#Ad #Collab #PoloGT #CarbonBlack #ThrottleScope #VWIndia #CarInfluencer #ContentCreator"
+  }
+};
+
+const HASHTAG_SETS = {
+  core: ["#PoloGTTSI","#PoloGT","#CarbonBlack","#Polo2018","#PoloGTIndia","#DSGLife","#VWPolo","#PoloCarbon"],
+  vw: ["#VWIndia","#VolkswagenIndia","#VWLife","#VWFamily","#VWCommunity","#VolkswagenPolo","#GermanEngineering","#VWLove"],
+  reach: ["#HotHatch","#CarReels","#CarEnthusiast","#CarContent","#IndianCarCommunity","#CarLovers","#ThrottleScope","#CarGram","#InstaCar","#CarPage"]
+};
+
+const SCRIPTS = {
+  15: {
+    overview: [
+      { cue: "HOOK", text: "2018. Carbon Black. 7-speed DSG. This is the Polo GT TSI — and it still goes hard." }
+    ],
+    engine: [
+      { cue: "HOOK", text: "103 bhp. 175 Nm from idle. A turbo the size of my fist — and it launches like it has something to prove." }
+    ],
+    design: [
+      { cue: "HOOK", text: "Piano black. Carbon accents. GT sport seats. The Carbon Black didn't just look different — it looked intentional." }
+    ],
+    dsg: [
+      { cue: "HOOK", text: "7-speed DSG. 200 millisecond shifts. You don't feel the gears change — you feel the car lunge." }
+    ],
+    daily: [
+      { cue: "HOOK", text: "17 kmpl. Turbo on tap. DSG in traffic. This is the only daily driver that never feels like a compromise." }
+    ],
+    mods: [
+      { cue: "HOOK", text: "The Carbon Black is already a statement. Mods just make it louder." }
+    ]
+  },
+  30: {
+    overview: [
+      { cue: "HOOK", text: "The 2018 Volkswagen Polo GT TSI Carbon Black. Say that five times fast." },
+      { cue: "BUILD", text: "1.2-litre turbocharged engine. 103 horses. 7-speed dual-clutch DSG. Carbon Black exclusive trim." },
+      { cue: "PEAK", text: "It's not the fastest car. It's not the biggest. But it's the one you remember." },
+      { cue: "CTA", text: "Drop a 🖤 if you know, you know." }
+    ],
+    engine: [
+      { cue: "HOOK", text: "People see a small hatch. I see 175 Nm from 1500 RPM." },
+      { cue: "BUILD", text: "The 1.2L TSI is turbocharged — meaning the torque hits early, hard, and doesn't let go." },
+      { cue: "PEAK", text: "Paired with a 7-speed DSG, every gear change is instant. This thing drives bigger than it looks." },
+      { cue: "CTA", text: "That's the GT TSI. Come back when your hatch can keep up." }
+    ],
+    design: [
+      { cue: "HOOK", text: "There are two kinds of Polo. And then there's the Carbon Black." },
+      { cue: "BUILD", text: "Piano black exterior accents. GT sport seats. Dark trim everywhere it matters." },
+      { cue: "PEAK", text: "VW didn't make this look expensive. They made it look intentional — which is harder." },
+      { cue: "CTA", text: "The Carbon Black edition. Still one of the cleanest special editions in India." }
+    ],
+    dsg: [
+      { cue: "HOOK", text: "The DSG gearbox is the reason this car feels alive." },
+      { cue: "BUILD", text: "Dual-clutch. Pre-selects the next gear before you lift off. Shifts in under 200 milliseconds." },
+      { cue: "PEAK", text: "In manual mode, the paddles let you hold gears to redline. In Auto, it just reads your mind." },
+      { cue: "CTA", text: "This is what 7 gears and German engineering feels like in India." }
+    ],
+    daily: [
+      { cue: "HOOK", text: "Can a hot hatch be a sensible daily driver? The Polo GT says yes." },
+      { cue: "BUILD", text: "17 kmpl on highways. Smooth DSG in traffic. McPherson struts that handle Hyderabad roads." },
+      { cue: "PEAK", text: "But the moment the road opens up — Sport mode, DSG paddles, and 103 horses. It transforms." },
+      { cue: "CTA", text: "Best of both worlds. That's the Carbon Black GT." }
+    ],
+    mods: [
+      { cue: "HOOK", text: "The Carbon Black GT TSI is one of the best mod platforms in India." },
+      { cue: "BUILD", text: "The MQB A0 platform means parts are everywhere. Lowering springs, intakes, exhausts — it's all there." },
+      { cue: "PEAK", text: "And the 1.2L TSI? Stage 1 tune can push it north of 130 bhp without touching the hardware." },
+      { cue: "CTA", text: "Follow for the build. This one's just getting started." }
+    ]
+  },
+  60: {
+    overview: [
+      { cue: "HOOK", text: "If you think the Polo GT TSI Carbon Black is just another hatchback, you haven't driven one." },
+      { cue: "CONTEXT", text: "2018. Volkswagen India dropped a special edition — Carbon Black — exclusive trim, piano black accents, GT sport seats." },
+      { cue: "ENGINE", text: "Under the hood: a 1.2-litre turbocharged TSI engine. 103 bhp. 175 Nm of torque from just 1500 rpm." },
+      { cue: "GEARBOX", text: "Mated to a 7-speed DSG — dual-clutch, paddle shifts, sub-200ms gear changes. It's fast without trying." },
+      { cue: "FEEL", text: "In Sport mode, the throttle response sharpens. The gearbox holds longer. The car you bought turns into the car you wanted." },
+      { cue: "CTA", text: "0 to 100 in 9.7 seconds. 17 kmpl on the highway. And a look that still turns heads in 2025. This is the Carbon Black. Drop a 🖤 below." }
+    ],
+    engine: [
+      { cue: "HOOK", text: "Let me tell you why the 1.2L TSI is actually one of the most underrated engines in India." },
+      { cue: "CONTEXT", text: "It's part of VW's EA111 family. Turbocharged. Direct injection. Variable geometry. All the tech, in a package smaller than your lunch." },
+      { cue: "NUMBERS", text: "103 bhp at 5000 rpm. 175 Nm from 1500 all the way to 4000 rpm. That's a flat torque plateau — it pulls everywhere." },
+      { cue: "FEEL", text: "The power delivery is linear at first, then aggressive past 3000 rpm. The DSG makes sure you're always in the right gear to exploit it." },
+      { cue: "STAGE1", text: "And for the mod crowd — a Stage 1 remap takes this to around 130 bhp without any hardware changes. The engine has headroom." },
+      { cue: "CTA", text: "Small displacement. Big personality. That's the 1.2L TSI in the Carbon Black GT. What do you think — is this still relevant in 2025?" }
+    ],
+    design: [
+      { cue: "HOOK", text: "VW built the Carbon Black as a special edition. What they actually built was a design statement." },
+      { cue: "EXTERIOR", text: "Start outside. Piano black on the mirrors, window lines, and lower trims. The body lines look sharper against the dark accents." },
+      { cue: "INTERIOR", text: "Inside: GT sport seats with Clark plaid inserts — red, dark grey, black. Leather-wrapped multifunction steering wheel. Carbon trim on the dash." },
+      { cue: "DETAIL", text: "The Carbon Black wasn't a sticker kit. Every blacked-out element was factory. It's deliberate, not decorative." },
+      { cue: "COMPARE", text: "Compare it to the base Polo — it's a completely different car psychologically. The Carbon Black feels like it costs more than it does." },
+      { cue: "CTA", text: "Special editions come and go. This one aged like wine. Drop your colour combo in the comments." }
+    ],
+    dsg: [], daily: [], mods: []
+  }
+};
+SCRIPTS[60].dsg = [
+  { cue: "HOOK", text: "The 7-speed DSG is not just a gearbox. In the Polo GT, it's the whole point." },
+  { cue: "HOW", text: "Dual-clutch means two clutch packs — one for odd gears, one for even. While you're in third, fourth is already pre-selected. The moment you shift, it's instant." },
+  { cue: "NUMBERS", text: "Sub-200 millisecond shift times. Faster than any human with a manual. And the paddles let you stay in full control." },
+  { cue: "MODES", text: "In Drive, it's calm and efficient. In Sport, it holds gears to the rev limiter, sharpens throttle response, and becomes a completely different machine." },
+  { cue: "CREEP", text: "Low-speed DSG creep is smooth. Traffic isn't the chore people say it is — the clutch management is near-perfect in the Polo." },
+  { cue: "CTA", text: "Manual loyalists will argue. But after 40,000 kilometres on this DSG — I'm not going back. That's the Carbon Black GT experience." }
+];
+SCRIPTS[60].daily = [
+  { cue: "HOOK", text: "People ask if the Polo GT TSI is practical as a daily. Short answer: it's the best daily I've ever owned." },
+  { cue: "TRAFFIC", text: "DSG in stop-and-go traffic is relaxing. No clutch fatigue. The creep function works like a smooth automatic. It's better than most torque-converter cars." },
+  { cue: "HIGHWAY", text: "Open road: 17 kmpl at a comfortable 100 kmph cruise. The 1.2 TSI is refined at highway speeds. NVH levels are excellent for the segment." },
+  { cue: "ROADS", text: "McPherson struts up front, trailing arm rear. The suspension is stiff for sporty feel but not punishing on broken roads. Hyderabad tested and approved." },
+  { cue: "BOOT", text: "251-litre boot. Fits grocery runs, gym bags, and weekend luggage. It's compact but smart about space." },
+  { cue: "CTA", text: "Sporty when you want it. Sensible when you need it. That's the Carbon Black GT TSI as a daily driver. Would you daily one?" }
+];
+SCRIPTS[60].mods = [
+  { cue: "HOOK", text: "The 2018 Polo GT TSI Carbon Black is one of the best mod platforms in India. And people are sleeping on it." },
+  { cue: "PLATFORM", text: "It's built on VW's MQB A0 platform — shared with multiple global VW Group products. That means aftermarket parts are everywhere." },
+  { cue: "STAGE1", text: "Start with a Stage 1 ECU remap. Dysons, APR, Revo — take your pick. You go from 103 to around 130 bhp with zero hardware changes." },
+  { cue: "HARDWARE", text: "Next: upgraded intercooler, a high-flow intake, and a sports exhaust. Now you're looking at Stage 2 territory — 145 to 150 bhp." },
+  { cue: "VISUAL", text: "For the exterior: lowering springs, 17-inch alloys, and a subtle rear lip. The Carbon Black's dark theme means mods integrate cleanly." },
+  { cue: "CTA", text: "The base car is already strong. The mod ceiling is high. And the community in India is growing. Follow along — the Carbon Black build starts now." }
+];
+
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  const tabs = document.querySelectorAll('.nav-tab');
+  const map = {home:0, hooks:1, captions:2, script:3, cli:4};
+  if (map[id] !== undefined) tabs[map[id]].classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function generateHooks() {
+  const vibe = document.getElementById('hook-vibe').value;
+  const hooks = HOOKS[vibe];
+  const container = document.getElementById('hooks-output');
+  container.innerHTML = hooks.map((h,i) => `
+    <div class="hook-item">
+      <span class="hook-num">0${i+1}</span>
+      <span style="flex:1;">${h}</span>
+      <button onclick="copyText(this,'${h.replace(/'/g,"\\'")}','Copied!')" style="background:none;border:1px solid var(--border);border-radius:6px;color:var(--muted);font-size:11px;padding:3px 8px;cursor:pointer;white-space:nowrap;font-family:var(--font-mono);">copy</button>
+    </div>`).join('');
+}
+
+function copyHooks() {
+  const vibe = document.getElementById('hook-vibe').value;
+  const text = HOOKS[vibe].map((h,i)=>`[${i+1}] ${h}`).join('\n');
+  navigator.clipboard.writeText(text);
+  showToast('All hooks copied!');
+}
+
+function generateCaption() {
+  const mood = document.getElementById('caption-mood').value;
+  const cap = CAPTIONS[mood];
+  const out = document.getElementById('caption-output');
+  out.innerHTML = `
+    <div class="caption-card">
+      <button class="copy-btn" onclick="copyText(this, \`${cap.text.replace(/`/g,'\\`')}\n\n${cap.tags}\`, 'Copied!')">copy</button>
+      <div class="caption-text">${cap.text.replace(/\n/g,'<br>')}</div>
+      <div class="caption-tags">${cap.tags}</div>
+    </div>`;
+}
+
+function initTagCloud() {
+  const all = [...HASHTAG_SETS.core, ...HASHTAG_SETS.vw, ...HASHTAG_SETS.reach];
+  const unique = [...new Set(all)];
+  const cloud = document.getElementById('tag-cloud');
+  cloud.innerHTML = unique.map(t=>`<span class="htag" onclick="toggleTag(this)">${t}</span>`).join('');
+}
+
+function toggleTag(el) { el.classList.toggle('selected'); }
+
+function selectTagSet(set) {
+  const tags = HASHTAG_SETS[set];
+  document.querySelectorAll('.htag').forEach(el => {
+    if (tags.includes(el.textContent)) el.classList.add('selected');
+  });
+}
+
+function clearTags() {
+  document.querySelectorAll('.htag').forEach(el => el.classList.remove('selected'));
+}
+
+function copySelectedTags() {
+  const selected = [...document.querySelectorAll('.htag.selected')].map(e=>e.textContent);
+  if (!selected.length) { showToast('Select some hashtags first'); return; }
+  navigator.clipboard.writeText(selected.join(' '));
+  showToast(`Copied ${selected.length} hashtags!`);
+}
+
+function generateScript() {
+  const len = parseInt(document.getElementById('script-length').value);
+  const focus = document.getElementById('script-focus').value;
+  const blocks = SCRIPTS[len][focus];
+  const out = document.getElementById('script-output');
+  if (!blocks || !blocks.length) { out.innerHTML='<div class="output-area"><span class="output-empty">No script for that combo yet.</span></div>'; return; }
+  const allText = blocks.map(b=>b.text).join('\n\n');
+  out.innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <span style="font-family:var(--font-mono);font-size:11px;color:var(--muted);">${len}s · ${focus} · ${blocks.length} beats</span>
+      <button onclick="copyText(this,\`${allText.replace(/`/g,'\\`')}\`,'Script copied!')" class="btn btn-ghost" style="font-size:11px;padding:5px 10px;">Copy script</button>
+    </div>
+    ${blocks.map(b=>`
+      <div class="script-block">
+        <div class="cue">${b.cue}</div>
+        ${b.text}
+      </div>`).join('')}`;
+}
+
+function runCLI() {
+  const val = document.getElementById('cli-cmd').value;
+  const out = document.getElementById('cli-output');
+  const parts = val.split(' ');
+  const cmd = parts[0];
+  const flags = {};
+  for (let i=1;i<parts.length;i+=2) { if(parts[i].startsWith('--')) flags[parts[i].slice(2)]=parts[i+1]; }
+
+  out.innerHTML = `<span style="color:var(--accent);">$ polo-kit ${val}</span>\n\n`;
+
+  if (cmd==='specs') {
+    out.innerHTML += `  Engine    : 1.2L TSI 4-cylinder turbocharged\n  Power     : 103 bhp @ 5000 rpm\n  Torque    : 175 Nm @ 1500 rpm\n  Gearbox   : 7-speed DSG\n  0-100     : ~9.7 seconds\n  Edition   : Carbon Black\n  Year      : 2018`;
+  } else if (cmd==='hooks') {
+    const vibe = flags.vibe || 'aggressive';
+    const h = HOOKS[vibe] || HOOKS.aggressive;
+    out.innerHTML += h.map((l,i)=>`  [${i+1}] ${l}`).join('\n');
+  } else if (cmd==='caption') {
+    const mood = flags.mood || 'hype';
+    const c = CAPTIONS[mood] || CAPTIONS.hype;
+    out.innerHTML += `  ${c.text.replace(/\n/g,'\n  ')}\n\n  ${c.tags}`;
+  } else if (cmd==='script') {
+    const len = parseInt(flags.length)||30;
+    const focus = flags.focus||'overview';
+    const blocks = (SCRIPTS[len]||SCRIPTS[30])[focus]||(SCRIPTS[30].overview);
+    out.innerHTML += blocks.map(b=>`  [${b.cue}]\n  ${b.text}`).join('\n\n');
+  }
+}
+
+function copyText(btn, text, msg) {
+  navigator.clipboard.writeText(text).then(()=>{
+    const orig = btn.textContent; btn.textContent = '✓';
+    showToast(msg||'Copied!');
+    setTimeout(()=>btn.textContent=orig, 1500);
+  });
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2000);
+}
+
+initTagCloud();
+
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  document.getElementById('install-banner').style.display = 'flex';
+});
+document.getElementById('install-btn').addEventListener('click', async () => {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    if (outcome==='accepted') document.getElementById('install-banner').style.display='none';
+    deferredPrompt = null;
+  }
+});
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(()=>{});
+}
+</script>
+</body>
+</html>
