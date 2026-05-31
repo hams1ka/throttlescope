@@ -1,8 +1,6 @@
 # ThrottleScope — Polo GT TSI Carbon Black
 
 > Content creation toolkit for the 2018 Volkswagen Polo GT TSI Carbon Black  
-> Built for [@throttlescope](https://instagram.com/throttlescope)
-
 ---
 
 ## Features
