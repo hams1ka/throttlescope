@@ -76,6 +76,5 @@ When opening in Chrome/Edge on mobile, tap **"Add to home screen"** or use the i
 ---
 
 ## Author
-
-Built by [@throttlescope](https://instagram.com/throttlescope)  
+  
 GitHub: [github.com/hams1ka](https://github.com/hams1ka)
